@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wzk.dao.PressDao">
+    <insert id="addPress" parameterType="Press">
+        insert into press(prID,prName) values(#{prID},#{prName});
+    </insert>
+
+    <!-- 根据ID查询书库信息 -->
+    <select id="getPress" parameterType="Press" resultType="Press">
+        select * from press where prID=#{prID};
+    </select>
+
+    <!-- 查询楼层信息，若prName不为空则模糊查询包含prName的楼层信息 -->
+    <select id="getPressList" parameterType="Press" resultType="Press">
+        select * from press where 1=1
+        <if test="prName!='null'">
+            and prName like concat('%',#{prName},'%')
+        </if>
+    </select>
+
+    <update id="updatePress" parameterType="Press">
+        update press set prName=#{prName}  where prID=#{prID};
+    </update>
+
+    <delete id="deletePress" parameterType="Press">
+        delete from press where prID=#{prID};
+    </delete>
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wzk.dao.PowerDao">
+
+    <insert id="addPower" parameterType="Power">
+        insert into power(pID,pName) values(#{pID},#{pName});
+    </insert>
+
+    <!-- 根据ID查询书库信息 -->
+    <select id="getPower" parameterType="Power" resultType="Power">
+        select * from power where pID=#{pID};
+    </select>
+
+    <!-- 查询楼层信息，若pName不为空则模糊查询包含pName的楼层信息 -->
+    <select id="getPowers" parameterType="Power" resultType="Power">
+        select * from power where 1=1
+        <if test="pName!='null'">
+            and pName like concat('%',#{pName},'%')
+        </if>
+    </select>
+
+    <update id="updatePower" parameterType="Power">
+        update power set pName=#{pName}  where pID=#{pID};
+    </update>
+
+    <delete id="deletePower" parameterType="Power">
+        delete from power where pID=#{pID};
+    </delete>
+</mapper>

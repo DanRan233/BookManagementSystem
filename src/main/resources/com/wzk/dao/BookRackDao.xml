@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wzk.dao.BookRackDao">
+
+    <insert id="addBookRack" parameterType="BookRack">
+        insert into bookRack(brID,brName,brStatus,srID) values(#{brID},#{brName},#{brStatus},#{srID});
+    </insert>
+
+    <!-- 根据ID查询书库信息 -->
+    <select id="getBookRack" parameterType="BookRack" resultType="BookRack">
+        select * from bookRack where brID=#{brID};
+    </select>
+
+    <!-- 查询楼层信息，若brName不为空则模糊查询包含brName的楼层信息 -->
+    <select id="getBookRackList" parameterType="BookRack" resultType="BookRack">
+        select * from bookRack where 1=1
+        <if test="brName!='null'">
+            and brName like concat('%',#{brName},'%')
+        </if>
+    </select>
+
+    <update id="updateBookRack" parameterType="BookRack">
+        update bookRack set brName=#{brName} ,brStatus=#{brStatus} ,srID=#{srID} where brID=#{brID};
+    </update>
+
+    <delete id="deleteBookRack" parameterType="BookRack">
+        delete from bookRack where brID=#{brID};
+    </delete>
+</mapper>

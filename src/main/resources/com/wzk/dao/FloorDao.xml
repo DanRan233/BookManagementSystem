@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wzk.dao.FloorDao">
+
+    <insert id="addFloor" parameterType="Floor">
+        insert into floor(fName,fStatus) values(#{fName},#{fStatus});
+    </insert>
+
+    <!-- 根据ID查询楼层信息 -->
+    <select id="getFloor" parameterType="Floor" resultType="Floor">
+        select * from floor where fID=#{fID};
+    </select>
+
+    <!-- 查询楼层信息，若fName不为空则模糊查询包含fName的楼层信息 -->
+    <select id="getFloorList" parameterType="Floor" resultType="Floor">
+        select * from floor where 1=1
+        <if test="fName!='null'">
+            and fName like concat('%',#{fName},'%')
+        </if>
+    </select>
+
+    <update id="updateFloor" parameterType="Floor">
+        update floor set fName=#{fName} ,fStatus=#{fStatus} where fID=#{fID};
+    </update>
+
+    <delete id="deleteFloor" parameterType="Floor">
+        delete from floor where fID=#{fID};
+    </delete>
+</mapper>

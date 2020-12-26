@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wzk.dao.DepartmentDao">
+
+    <insert id="addDepartment" parameterType="Department">
+        insert into department(depID,depName) values(#{depID},#{depName});
+    </insert>
+
+    <!-- 根据ID查询书库信息 -->
+    <select id="getDepartment" parameterType="Department" resultType="Department">
+        select * from department where depID=#{depID};
+    </select>
+
+    <!-- 查询楼层信息，若depName不为空则模糊查询包含depName的楼层信息 -->
+    <select id="getDepartmentList" parameterType="Department" resultType="Department">
+        select * from department where 1=1
+        <if test="depName!='null'">
+            and depName like concat('%',#{depName},'%')
+        </if>
+    </select>
+
+    <update id="updateDepartment" parameterType="Department">
+        update department set depName=#{depName}  where depID=#{depID};
+    </update>
+
+    <delete id="deleteDepartment" parameterType="Department">
+        delete from department where depID=#{depID};
+    </delete>
+</mapper>
