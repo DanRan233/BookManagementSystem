@@ -16,8 +16,8 @@
     <!-- 初始化各个依赖的版本号 -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
 
         <!-- junit Java单元测试依赖，4.13-rc-2 -->
         <junit.version>4.13-rc-2</junit.version>

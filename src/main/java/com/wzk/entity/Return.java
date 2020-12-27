@@ -8,7 +8,7 @@ package com.wzk.entity;
  */
 public class Return {
     String sID;//学生学号外键
-    String bNumber;//书本编号外键
+    int bID;//书本编号外键
     String admID;//管理员编号外键
     String rDate;//归还时间
     int rStatus;//归还记录状态
@@ -16,9 +16,9 @@ public class Return {
     public Return() {
     }
 
-    public Return(String sID, String bNumber, String admID, String rDate, int rStatus) {
+    public Return(String sID, int bID, String admID, String rDate, int rStatus) {
         this.sID = sID;
-        this.bNumber = bNumber;
+        this.bID = bID;
         this.admID = admID;
         this.rDate = rDate;
         this.rStatus = rStatus;
@@ -32,12 +32,12 @@ public class Return {
         this.sID = sID;
     }
 
-    public String getbNumber() {
-        return bNumber;
+    public int getbID() {
+        return bID;
     }
 
-    public void setbNumber(String bNumber) {
-        this.bNumber = bNumber;
+    public void setbID(int bID) {
+        this.bID = bID;
     }
 
     public String getAdmID() {
@@ -68,7 +68,7 @@ public class Return {
     public String toString() {
         return "Return{" +
                 "sID='" + sID + '\'' +
-                ", bNumber='" + bNumber + '\'' +
+                ", bID=" + bID +
                 ", admID='" + admID + '\'' +
                 ", rDate='" + rDate + '\'' +
                 ", rStatus=" + rStatus +

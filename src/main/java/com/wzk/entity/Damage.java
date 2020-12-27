@@ -8,16 +8,16 @@ package com.wzk.entity;
  */
 public class Damage {
     String sID;//学生学号外键
-    String bNumber;//书本编号外键
+    int bID;//书本编号外键
     String admID;//管理员编号外键
     int damStatus;//损坏记录状态
 
     public Damage() {
     }
 
-    public Damage(String sID, String bNumber, String admID, int damStatus) {
+    public Damage(String sID, int bID, String admID, int damStatus) {
         this.sID = sID;
-        this.bNumber = bNumber;
+        this.bID = bID;
         this.admID = admID;
         this.damStatus = damStatus;
     }
@@ -30,12 +30,12 @@ public class Damage {
         this.sID = sID;
     }
 
-    public String getbNumber() {
-        return bNumber;
+    public int getbID() {
+        return bID;
     }
 
-    public void setbNumber(String bNumber) {
-        this.bNumber = bNumber;
+    public void setbID(int bID) {
+        this.bID = bID;
     }
 
     public String getAdmID() {
@@ -58,7 +58,7 @@ public class Damage {
     public String toString() {
         return "Damage{" +
                 "sID='" + sID + '\'' +
-                ", bNumber='" + bNumber + '\'' +
+                ", bID=" + bID +
                 ", admID='" + admID + '\'' +
                 ", damStatus=" + damStatus +
                 '}';

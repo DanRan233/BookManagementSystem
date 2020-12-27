@@ -8,20 +8,19 @@ package com.wzk.entity;
  */
 public class Appointment {
     String sID;//学生学号外键
-    String bNumber;//书本编号外键
+    int bID;//书本编号外键
     String appDate;//预约时间
     int appStatus;//预约记录状态
 
     public Appointment() {
     }
 
-    public Appointment(String sID, String bNumber, String appDate, int appStatus) {
+    public Appointment(String sID, int bID, String appDate, int appStatus) {
         this.sID = sID;
-        this.bNumber = bNumber;
+        this.bID = bID;
         this.appDate = appDate;
         this.appStatus = appStatus;
     }
-
     public String getsID() {
         return sID;
     }
@@ -30,12 +29,12 @@ public class Appointment {
         this.sID = sID;
     }
 
-    public String getbNumber() {
-        return bNumber;
+    public int getbID() {
+        return bID;
     }
 
-    public void setbNumber(String bNumber) {
-        this.bNumber = bNumber;
+    public void setbID(int bID) {
+        this.bID = bID;
     }
 
     public String getAppDate() {
@@ -58,7 +57,7 @@ public class Appointment {
     public String toString() {
         return "Appointment{" +
                 "sID='" + sID + '\'' +
-                ", bNumber='" + bNumber + '\'' +
+                ", bID=" + bID +
                 ", appDate='" + appDate + '\'' +
                 ", appStatus=" + appStatus +
                 '}';

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wzk.dao.BookDao">
+
+    <!-- 批量添加添加书本信息 -->
+    <insert id="addBook" parameterType="java.util.List">
+        insert into book(bNumber,bName,author,pubDate,status,prID,btID,brID)
+        values
+        <foreach collection="list" index="index" separator="," item="book">
+            (
+            #{book.bNumber},#{book.bName},
+            #{book.author},#{book.pubDate},#{book.status},
+            #{book.prID},#{book.btID},#{book.brID}
+            )
+        </foreach>
+    </insert>
+
+</mapper>

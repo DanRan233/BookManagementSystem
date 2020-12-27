@@ -7,8 +7,8 @@ package com.wzk.entity;
  * @date 2020/12/26 17:23
  */
 public class Book {
-    String bID;//书籍编号
-    String bNumber;//书本编号
+    int bID;//书本编号
+    String bNumber;//书籍编号
     String bName;//书籍名称
     String author;//作者名称
     String pubDate;//出版日期
@@ -20,7 +20,7 @@ public class Book {
     public Book() {
     }
 
-    public Book(String bID, String bNumber, String bName, String author, String pubDate, int status, String prID, String btID, String brID) {
+    public Book(int bID, String bNumber, String bName, String author, String pubDate, int status, String prID, String btID, String brID) {
         this.bID = bID;
         this.bNumber = bNumber;
         this.bName = bName;
@@ -32,11 +32,11 @@ public class Book {
         this.brID = brID;
     }
 
-    public String getbID() {
+    public int getbID() {
         return bID;
     }
 
-    public void setbID(String bID) {
+    public void setbID(int bID) {
         this.bID = bID;
     }
 

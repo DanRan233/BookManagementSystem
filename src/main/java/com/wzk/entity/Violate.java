@@ -8,16 +8,16 @@ package com.wzk.entity;
  */
 public class Violate {
     String sID;//学生学号外键
-    String bNumber;//书本编号外键
+    int bID;//书本编号外键
     String admID;//管理员编号外键
     int vStatus;//违约记录状态
 
     public Violate() {
     }
 
-    public Violate(String sID, String bNumber, String admID, int vStatus) {
+    public Violate(String sID, int bID, String admID, int vStatus) {
         this.sID = sID;
-        this.bNumber = bNumber;
+        this.bID = bID;
         this.admID = admID;
         this.vStatus = vStatus;
     }
@@ -30,12 +30,12 @@ public class Violate {
         this.sID = sID;
     }
 
-    public String getbNumber() {
-        return bNumber;
+    public int getbID() {
+        return bID;
     }
 
-    public void setbNumber(String bNumber) {
-        this.bNumber = bNumber;
+    public void setbID(int bID) {
+        this.bID = bID;
     }
 
     public String getAdmID() {
@@ -58,7 +58,7 @@ public class Violate {
     public String toString() {
         return "Violate{" +
                 "sID='" + sID + '\'' +
-                ", bNumber='" + bNumber + '\'' +
+                ", bID=" + bID +
                 ", admID='" + admID + '\'' +
                 ", vStatus=" + vStatus +
                 '}';
