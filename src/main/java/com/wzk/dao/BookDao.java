@@ -42,4 +42,24 @@ public interface BookDao {
      * @return      com.wzk.entity.Book
      */
     Book getBook(Book book);
+
+    /**
+     * description: 根据bID或bNumber来对图书信息进行更新操作，bID是根据书本编号更新单个、bNumber是根据书籍编号更新多个
+     * TODO:
+     * @date         2020/12/28 11:24
+     * @author      DanRan233
+     * @Param       [book]
+     * @return      int
+     */
+    int updateBook(Book book);
+
+    /**
+     * description: 根据bID或bNumber对图书进行删除操作，绝不允许两个属性都不存在的情况执行删除操作！
+     * TODO: service层应对传入的bID和bNumber进行处理，二者只允许存在一个
+     * @date         2020/12/28 13:48
+     * @author      DanRan233
+     * @Param       [book]
+     * @return      int
+     */
+    int delBook(Book book);
 }

@@ -17,7 +17,7 @@
     <!-- 查询楼层信息，若pName不为空则模糊查询包含pName的楼层信息 -->
     <select id="getPowers" parameterType="Power" resultType="Power">
         select * from power where 1=1
-        <if test="pName!='null'">
+        <if test='pName!="" and pName!=null and pName!="null"'>
             and pName like concat('%',#{pName},'%')
         </if>
     </select>

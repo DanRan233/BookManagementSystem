@@ -17,7 +17,7 @@
     <!-- 查询楼层信息，若fName不为空则模糊查询包含fName的楼层信息 -->
     <select id="getFloorList" parameterType="Floor" resultType="Floor">
         select * from floor where 1=1
-        <if test="fName!='null'">
+        <if test='fName!="" and fName!=null and fName!="null"'>
             and fName like concat('%',#{fName},'%')
         </if>
     </select>

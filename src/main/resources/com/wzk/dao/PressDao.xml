@@ -16,7 +16,7 @@
     <!-- 查询楼层信息，若prName不为空则模糊查询包含prName的楼层信息 -->
     <select id="getPressList" parameterType="Press" resultType="Press">
         select * from press where 1=1
-        <if test="prName!='null'">
+        <if test='prName!="" and prName!=null and prName!="null"'>
             and prName like concat('%',#{prName},'%')
         </if>
     </select>

@@ -17,4 +17,8 @@ public interface BookServiceIF {
     Result getBookList(Book book);
 
     Result getBook(Book book);
+
+    Result updateBook(Book book);
+
+    Result delBook(Book book);
 }

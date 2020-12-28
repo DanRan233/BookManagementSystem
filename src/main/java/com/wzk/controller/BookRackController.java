@@ -21,7 +21,7 @@ public class BookRackController {
     BookRackServiceIF bookRackServiceIF;
 
     /**
-     * description: 
+     * description: 添加书架信息
      * TODO:
      * @date         2020/12/26 14:16
      * @author      DanRan233
@@ -34,7 +34,7 @@ public class BookRackController {
     }
 
     /**
-     * description: 
+     * description: 根据brID获取单个书架信息
      * TODO:
      * @date         2020/12/26 14:16
      * @author      DanRan233
@@ -48,7 +48,7 @@ public class BookRackController {
     }
 
     /**
-     * description: 
+     * description: 根据srID或brName模糊查询书架信息
      * TODO:
      * @date         2020/12/26 14:16
      * @author      DanRan233

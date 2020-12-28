@@ -16,7 +16,7 @@
     <!-- 查询楼层信息，若srName不为空则模糊查询包含fName的楼层信息 -->
     <select id="getStackRoomList" parameterType="StackRoom" resultType="StackRoom">
         select * from stack_room where 1=1
-        <if test="srName!='null'">
+        <if test='srName!="" and srName!=null and srName!="null"'>
             and srName like concat('%',#{srName},'%')
         </if>
     </select>

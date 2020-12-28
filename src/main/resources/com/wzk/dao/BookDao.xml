@@ -5,6 +5,11 @@
 
 <mapper namespace="com.wzk.dao.BookDao">
 
+    <resultMap id="book" type="com.wzk.entity.Book">
+        <!-- 实体类中pubDate属性的类型为String 需将该属性映射为为数据库中的DATE类型 -->
+        <result column="pubDate" property="pubDate" jdbcType="DATE"></result>
+    </resultMap>
+
     <!-- 批量添加添加书本信息 -->
     <insert id="addBook" parameterType="java.util.List">
         insert into book(bNumber,bName,author,pubDate,status,prID,btID,brID)
@@ -26,10 +31,10 @@
     <!-- 获取图书信息列表  -->
     <select id="getBookList" parameterType="Book" resultType="Book">
         select * from book where 1=1
-        <if test='bName!="null"'>
+        <if test='bName!="" and bName!=null and bName!="null"'>
             and bName like concat('%',#{bName},'%')
         </if>
-        <if test='bNumber != "null"'>
+        <if test='bNumber!="" and bNumber!=null and bNumber!="null"'>
             and bNumber like concat('%',#{bNumber},'%')
         </if>
         <if test="status != -1">
@@ -37,14 +42,25 @@
         </if>
     </select>
 
+    <!-- 更新书籍信息 -->
     <update id="updateBook" parameterType="Book">
-        update book set bNumber=#{},bName=#{},author=#{author},pubDate=#{pubDate},
+        update book set bNumber=#{bNumber},bName=#{bName},author=#{author},pubDate=#{pubDate},
         status=#{status},prID=#{prID},btID=#{btID},brID=#{brID}
-        where
-        <if test='bNumber!="null"'>
+        where 1=1
+        <if test='bID!=0'>
+           and bID=#{bID}
+        </if>
+    </update>
+
+    <!-- 删除书籍信息  必须存在bID或bNumber,如若不存在则语句必须出现语法错误以避免删除全部数据 -->
+    <delete id="delBook" parameterType="Book">
+        delete from book where
+        <if test='bID!=0'>
+            bID = #{bID}
+        </if>
+        <if test='bNumber!="" and bNumber!=null and bNumber!="null"'>
             bNumber=#{bNumber}
         </if>
-        <if test='bID!=0'></if>
-    </update>
+    </delete>
 
 </mapper>

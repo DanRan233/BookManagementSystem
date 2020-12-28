@@ -4,7 +4,6 @@ import com.wzk.entity.Book;
 import com.wzk.entity.Result;
 import com.wzk.service.BookServiceIF;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -72,5 +71,33 @@ public class BookController {
         return bookServiceIF.getBookList(book);
     }
 
+
+    /**
+     * description: 根据bID或bNumber来对图书信息进行修改
+     * TODO:未对传参做非空判断，更新数据时不应允许有属性为空
+     * @date         2020/12/28 11:35
+     * @author      DanRan233
+     * @Param       [book]
+     * @return      com.wzk.entity.Result
+     */
+    @RequestMapping("/updateBook")
+    public Result updateBook(@RequestBody Book book){
+        System.out.println(book);
+        return bookServiceIF.updateBook(book);
+    }
+
+    /**
+     * description: 根据bID或bName来对图书进行删除
+     * TODO: 应在service层或controller层对以上两个属性进行一个非空判断与互斥处理
+     * @date         2020/12/28 13:55
+     * @author      DanRan233
+     * @Param       [book]
+     * @return      com.wzk.entity.Result
+     */
+    @RequestMapping("/delBook")
+    public Result delBook(@RequestBody Book book){
+        System.out.println(book);
+        return bookServiceIF.delBook(book);
+    }
 
 }

@@ -17,7 +17,7 @@
     <!-- 查询楼层信息，若depName不为空则模糊查询包含depName的楼层信息 -->
     <select id="getDepartmentList" parameterType="Department" resultType="Department">
         select * from department where 1=1
-        <if test="depName!='null'">
+        <if test='depName!="" and depName!=null and depName!="null"'>
             and depName like concat('%',#{depName},'%')
         </if>
     </select>

@@ -80,4 +80,47 @@ public class BookServiceImpl implements BookServiceIF {
         result.setData(b);
         return result;
     }
+
+    /**
+     * description:
+     * TODO:
+     * @date         2020/12/28 11:31
+     * @author      DanRan233
+     * @Param       [book]
+     * @return      com.wzk.entity.Result
+     */
+    @Override
+    public Result updateBook(Book book) {
+        Result result = new Result(ResultEnum.UNEXECUTED.getCode(), ResultEnum.UNEXECUTED.getMessage());
+        int i = bookDao.updateBook(book);
+        if(i>0){
+            result.setCode(ResultEnum.SUCCESS.getCode());
+            result.setMessage(ResultEnum.SUCCESS.getMessage());
+        }else{
+            result.setMessage(ResultEnum.UNEXECUTED.getMessage());
+        }
+        return result;
+    }
+
+    /**
+     * description: 
+     * TODO:
+     * @date         2020/12/28 13:52
+     * @author      DanRan233
+     * @Param       [book]
+     * @return      com.wzk.entity.Result
+     */
+    @Override
+    public Result delBook(Book book) {
+        Result result = new Result(ResultEnum.UNEXECUTED.getCode(), ResultEnum.UNEXECUTED.getMessage());
+        System.err.println(book);
+        int i = bookDao.delBook(book);
+        if(i>0){
+            result.setCode(ResultEnum.SUCCESS.getCode());
+            result.setMessage(ResultEnum.SUCCESS.getMessage());
+        }else{
+            result.setMessage(ResultEnum.UNEXECUTED.getMessage());
+        }
+        return result;
+    }
 }

@@ -17,7 +17,7 @@
     <!-- 查询楼层信息，若brName不为空则模糊查询包含brName的楼层信息 -->
     <select id="getBookRackList" parameterType="BookRack" resultType="BookRack">
         select * from bookRack where 1=1
-        <if test="brName!='null'">
+        <if test='brName!="" and brName!=null and brName!="null"'>
             and brName like concat('%',#{brName},'%')
         </if>
     </select>
