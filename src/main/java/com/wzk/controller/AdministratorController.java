@@ -1,6 +1,7 @@
 package com.wzk.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,6 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RequestMapping("/adm")
 @RestController
-@Controller
+@CrossOrigin//spring4.2以上支持，解决跨域问题
 public class AdministratorController {
 }

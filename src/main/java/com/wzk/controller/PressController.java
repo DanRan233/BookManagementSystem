@@ -5,10 +5,7 @@ import com.wzk.entity.Press;
 import com.wzk.service.PressServiceIF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author DanRan233
@@ -18,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RequestMapping("/press")
 @RestController
-@Controller
+@CrossOrigin//spring4.2以上支持，解决跨域问题
 public class PressController {
     @Autowired
     PressServiceIF pressServiceIF;

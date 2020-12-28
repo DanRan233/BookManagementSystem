@@ -18,4 +18,33 @@
         </foreach>
     </insert>
 
+    <!-- 获取单个图书详细信息 -->
+    <select id="getBook" parameterType="Book" resultType="Book">
+        select * from book where bID=#{bID};
+    </select>
+
+    <!-- 获取图书信息列表  -->
+    <select id="getBookList" parameterType="Book" resultType="Book">
+        select * from book where 1=1
+        <if test='bName!="null"'>
+            and bName like concat('%',#{bName},'%')
+        </if>
+        <if test='bNumber != "null"'>
+            and bNumber like concat('%',#{bNumber},'%')
+        </if>
+        <if test="status != -1">
+            and status=#{status}
+        </if>
+    </select>
+
+    <update id="updateBook" parameterType="Book">
+        update book set bNumber=#{},bName=#{},author=#{author},pubDate=#{pubDate},
+        status=#{status},prID=#{prID},btID=#{btID},brID=#{brID}
+        where
+        <if test='bNumber!="null"'>
+            bNumber=#{bNumber}
+        </if>
+        <if test='bID!=0'></if>
+    </update>
+
 </mapper>

@@ -5,6 +5,7 @@ import com.wzk.entity.Student;
 import com.wzk.service.StudentServiceIF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RequestMapping("/stu")
 @RestController
-@Controller
+@CrossOrigin//spring4.2以上支持，解决跨域问题
 public class StudentController {
 
     @Autowired

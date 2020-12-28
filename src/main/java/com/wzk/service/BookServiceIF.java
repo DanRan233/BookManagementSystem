@@ -13,4 +13,8 @@ import java.util.List;
  */
 public interface BookServiceIF {
     Result addBook(List<Book> list);
+
+    Result getBookList(Book book);
+
+    Result getBook(Book book);
 }
