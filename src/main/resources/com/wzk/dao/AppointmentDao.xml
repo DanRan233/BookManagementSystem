@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wzk.dao.AppointmentDao">
+    <resultMap id="appointment" type="com.wzk.entity.Appointment">
+        <!-- 实体类中pubDate属性的类型为String 需将该属性映射为为数据库中的DATE类型 -->
+        <result column="appDate" property="appDate" jdbcType="DATE"></result>
+    </resultMap>
+
+    <insert id="addAppointment" parameterType="Appointment">
+        insert into appointment(sID,bID,appDate,appStatus)
+        values(#{sID},#{bID},DATE_SUB(NOW(),INTERVAL -3 day),2)
+    </insert>
+
+    <update id="updateAppointment" parameterType="Appointment">
+        update appointment set sID=#{sID},bID=#{bID},appStatus=#{appStatus}
+        where sID=#{sID} and bID=#{bID} and appStatus=2
+    </update>
+
+    <select id="getAppointment" parameterType="Appointment" resultType="Appointment">
+        select * from appointment where sID=${sID}
+        <if test="appStatus!=0">
+            and appStatus=#{appStatus}
+<!--            and bID = #{bID}-->
+        </if>
+        <if test="bID!=0">
+            and bID = #{bID}
+        </if>
+    </select>
+
+    <select id="getAppointmentList" parameterType="Appointment" resultType="Appointment">
+        select * from appointment where 1=1
+        <if test='sID!="" and sID!=null and sID!="null"'>
+            and sID = #{sID}
+        </if>
+        <if test='bID!=0'>
+            and bID = #{bID}
+        </if>
+        <if test='appDate!="" and appDate!=null and appDate!="null"'>
+            and appDate <![CDATA[ <= ]]> now()
+        </if>
+        <if test="appStatus!=0">
+            and appStatus = #{appStatus}
+        </if>
+    </select>
+
+</mapper>

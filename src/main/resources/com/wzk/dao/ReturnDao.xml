@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wzk.dao.ReturnDao">
+    <resultMap id="return" type="com.wzk.entity.Return">
+        <!-- 实体类中pubDate属性的类型为String 需将该属性映射为为数据库中的DATE类型 -->
+        <result column="rDate" property="rDate" jdbcType="DATE"></result>
+    </resultMap>
+
+    <insert id="addReturn" parameterType="Return">
+        insert into `return`(sID,bID,rDate,rStatus)
+        values(#{sID},#{bID},NOW(),#{rStatus})
+    </insert>
+
+    <update id="updateReturn" parameterType="Return">
+        update return set sID=#{sID},bID=#{bID},admID=#{admID},rDate=#{rDate},rStatus=#{rStatus}
+    </update>
+
+    <select id="getReturnList" parameterType="Return" resultType="Return">
+        select * from return where 1=1
+        <if test='sID!="" and sID!=null and sID!="null"'>
+            and sID = #{sID}
+        </if>
+        <if test='bID!=0'>
+            and bID = #{bID}
+        </if>
+        <if test='admID!="" and admID!=null and admID!="null"'>
+            and admID=#{admID}
+        </if>
+        <if test='rDate!="" and rDate!=null and rDate!="null"'>
+            and rDate = #{rDate}
+        </if>
+        <if test="rStatus!=0">
+            and rStatus = #{rStatus}
+        </if>
+    </select>
+
+</mapper>

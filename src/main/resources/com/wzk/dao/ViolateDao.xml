@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wzk.dao.ViolateDao">
+
+    <insert id="addViolate" parameterType="Violate">
+        insert into violate(sID,bID,admID,vStatus)
+        values(#{sID},#{bID},admID,#{vStatus})
+    </insert>
+
+    <update id="updateViolate" parameterType="Violate">
+        update violate set admID=#{admID},vStatus=5 where bID=#{bID} and vStatus=4
+    </update>
+
+    <select id="getViolate" parameterType="Violate" resultType="int">
+        select count(*) as n from violate where 1=1
+        <if test='sID!="" and sID!=null and sID!="null"'>
+            and sID = #{sID}
+        </if>
+        <if test='bID!=0'>
+            and bID = #{bID}
+        </if>
+            and vStatus = 4
+    </select>
+
+
+    <select id="getViolateList" parameterType="Violate" resultType="Violate">
+        select * from violate where 1=1
+        <if test='sID!="" and sID!=null and sID!="null"'>
+            and sID = #{sID}
+        </if>
+        <if test='bID!=0'>
+            and bID = #{bID}
+        </if>
+        <if test='admID!="" and admID!=null and admID!="null"'>
+            and admID=#{admID}
+        </if>
+        <if test="vStatus!=0">
+            and vStatus = #{vStatus}
+        </if>
+    </select>
+</mapper>

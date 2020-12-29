@@ -2,10 +2,11 @@ package com.wzk.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.wzk.dao.BookDao;
+import com.wzk.dao.BookRackDao;
 import com.wzk.dao.FloorDao;
-import com.wzk.entity.Floor;
-import com.wzk.entity.Result;
-import com.wzk.entity.ResultEnum;
+import com.wzk.dao.StackRoomDao;
+import com.wzk.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,12 @@ public class FloorServiceImpl implements FloorServiceIF {
 
     @Autowired
     FloorDao floorDao;
+    @Autowired
+    StackRoomDao stackRoomDao;
+    @Autowired
+    BookDao bookDao;
+    @Autowired
+    BookRackDao bookRackDao;
 
     /**
      * description:
@@ -91,7 +98,7 @@ public class FloorServiceImpl implements FloorServiceIF {
 
     /**
      * description:
-     * TODO:
+     * TODO:程序设计严重失误，MySQL数据触发器无法触发，先应付课程设计抽时间需要重构
      *
      * @return com.wzk.entity.Result
      * @date 2020/12/26 12:16
@@ -101,12 +108,39 @@ public class FloorServiceImpl implements FloorServiceIF {
     @Override
     public Result updateFloor(Floor floor) {
         Result result = new Result(ResultEnum.UNEXECUTED.getCode(), ResultEnum.UNEXECUTED.getMessage());
-        int i = floorDao.updateFloor(floor);
-        if (i >= 0) {
+        if(floorDao.getFloor(floor)!=null) {
+            int i = floorDao.updateFloor(floor);
+            //获取楼层下属所有书库
+            List<StackRoom> stackRoomsList = stackRoomDao.getStackRoomList(new StackRoom("", "", 0, floor.getfID()));
+            for (StackRoom stackRoom : stackRoomsList) {
+                //将书库状态与楼层状态设置一致
+                stackRoom.setSrStatus(floor.getfStatus());
+                stackRoomDao.updateSrStatus(stackRoom);
+                //获取书库下属所有书架
+                List<BookRack> bookRacksList = bookRackDao.getBookRackList(new BookRack("", "", stackRoom.getSrID(), 0));
+                for (BookRack br : bookRacksList) {
+                    //将书架状态与书库状态设置一致
+                    br.setBrStatus(stackRoom.getSrStatus());
+                    bookRackDao.updateBrStatus(br);
+                    //获取书架下所属书本
+                    List<Book> bookList = bookDao.getBookList(new Book(-1, br.getBrID()));
+                    for (Book b : bookList) {
+                        //将书本状态与书架状态设置一致
+                        b.setStatus(br.getBrStatus());
+                        bookDao.updateStatus(b);
+                    }
+                }
+            }
+            if (i >= 0) {
+                result.setCode(ResultEnum.SUCCESS.getCode());
+                result.setMessage(ResultEnum.SUCCESS.getMessage());
+            } else {
+                result.setMessage(ResultEnum.ERROR.getMessage());
+            }
+        }else {
+            floorDao.addFloor(floor);
             result.setCode(ResultEnum.SUCCESS.getCode());
             result.setMessage(ResultEnum.SUCCESS.getMessage());
-        } else {
-            result.setMessage(ResultEnum.ERROR.getMessage());
         }
         return result;
     }
@@ -115,7 +149,7 @@ public class FloorServiceImpl implements FloorServiceIF {
      * description:
      * TODO:
      *
-     * @return com.wzk.entity.Result
+     * @return com.wzk.entit y.Result
      * @date 2020/12/26 12:17
      * @author DanRan233
      * @Param [floor]

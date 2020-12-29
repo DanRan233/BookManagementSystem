@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wzk.dao.DamageDao">
+
+    <insert id="addDamage" parameterType="Damage">
+        insert into damage(sID,bID,admID,damStatus)
+        values(#{sID},#{bID},admID,#{damStatus})
+    </insert>
+
+    <update id="updateDamage" parameterType="Damage">
+        update damage set sID=#{sID},bID=#{bID},admID=#{admID},damStatus=#{damStatus}
+    </update>
+
+    <select id="getDamageList" parameterType="Damage" resultType="Damage">
+        select * from damage where 1=1
+        <if test='sID!="" and sID!=null and sID!="null"'>
+            and sID = #{sID}
+        </if>
+        <if test='bID!=0'>
+            and bID = #{bID}
+        </if>
+        <if test='admID!="" and admID!=null and admID!="null"'>
+            and admID=#{admID}
+        </if>
+        <if test="damStatus!=0">
+            and damStatus = #{damStatus}
+        </if>
+    </select>
+</mapper>

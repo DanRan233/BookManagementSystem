@@ -17,6 +17,8 @@ public interface StackRoomDao {
 
     List<StackRoom> getStackRoomList(StackRoom stackRoom);
 
+    int updateSrStatus(StackRoom stackRoom);
+
     int updateStackRoom(StackRoom stackRoom);
 
     int deleteStackRoom(StackRoom stackRoom);

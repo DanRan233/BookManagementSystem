@@ -48,8 +48,8 @@ public class StackRoomController {
      * @return      com.wzk.entity.Result
      */
     @RequestMapping("/getStackRoomList")
-    public Result getStackRoomList(@RequestParam(defaultValue = "null") String srName, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "5") Integer pageSize) {
-        StackRoom stackRoom = new StackRoom(srName);
+    public Result getStackRoomList(@RequestBody StackRoom stackRoom, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "100") Integer pageSize) {
+        System.out.println(stackRoom);
         return stackRoomServiceIF.getStackRoomList(stackRoom, pageNum, pageSize);
     }
 

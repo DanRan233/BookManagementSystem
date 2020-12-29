@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>书本信息</title>
+	</head>
+
+	<link rel="stylesheet" type="text/css" href="../js/easyui/themes/bootstrap/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../js/easyui/themes/icon.css">
+	<script src="../js/easyui/jquery.min.js"></script>
+	<script src="../js/easyui/jquery.easyui.min.js"></script>
+	<script src="../js/page.js"></script>
+	<script src="../js/bookInfo.js"></script>
+
+	<style type="text/css">
+		li input {
+			cursor: pointer;
+			border-radius: 8px;
+			width: 50px;
+			height: 30px;
+			outline: none;
+			text-align: cente;
+		}
+	</style>
+	<body>
+
+		<div id="Navigation" style="width: 100%;">
+			<input type="text" style="width: 97%; padding:20px ;" readonly value="书本信息">
+			<p></p>
+			<span style="float: right; margin-right: 30px">
+				<input type="text" id="TextOne" class="input" placeholder="请输入要查询的图书名称" />
+				<input type="button" value="搜索" id="QueryOne" class="input" onclick="queryPage_book(1)" />
+			</span>
+		</div>
+		<div id="content" style="width:98% ;margin-top: 20px">
+			<table id="TableOne" style="width: 100%">
+
+			</table>
+		</div>
+		<div id="bottom" style="margin-top: 30px;">
+			共有记录<span id="total"></span>条，每页显示5条
+			<Ul style="float: right;">
+				<li style="float: left; margin-right: 20px; list-style:none;" id="li_One"><input type="button" readonly value="首页"
+					 onclick="updatePage(this)">
+				</li>
+				<li style="float: left; margin-right: 20px; list-style:none;" id="li_Two"><input type="button" readonly value="上一页"
+					 onclick="updatePage(this)">
+				</li>
+				<li style="float: left; margin-right: 20px; list-style:none;" id="li_Three"><input type="text" id="page" readonly
+					 value=""></li>
+				<li style="float: left; margin-right: 20px; list-style:none;" id="li_Four"><input type="button" readonly value="下一页"
+					 onclick="updatePage(this)">
+				</li>
+				<li style="float: left; margin-right: 20px; list-style:none;" id="li_Five"><input type="button" readonly value="尾页"
+					 onclick="updatePage(this)">
+				</li>
+			</Ul>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+</script>

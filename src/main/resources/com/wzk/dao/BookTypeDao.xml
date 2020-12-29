@@ -8,12 +8,12 @@
         insert into book_Type(btID,btName) values(#{btID},#{btName});
     </insert>
 
-    <!-- 根据ID查询书库信息 -->
+    <!-- 根据ID查询类型信息 -->
     <select id="getBookType" parameterType="BookType" resultType="BookType">
         select * from book_Type where btID=#{btID};
     </select>
 
-    <!-- 查询楼层信息，若btName不为空则模糊查询包含btName的楼层信息 -->
+    <!-- 查询类型信息，若btName不为空则模糊查询包含btName的类型信息 -->
     <select id="getBookTypeList" parameterType="BookType" resultType="BookType">
         select * from book_Type where 1=1
         <if test='btName!="" and btName!=null and btName!="null"'>

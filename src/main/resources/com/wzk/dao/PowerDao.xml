@@ -9,12 +9,12 @@
         insert into power(pID,pName) values(#{pID},#{pName});
     </insert>
 
-    <!-- 根据ID查询书库信息 -->
+    <!-- 根据ID查询权限信息 -->
     <select id="getPower" parameterType="Power" resultType="Power">
         select * from power where pID=#{pID};
     </select>
 
-    <!-- 查询楼层信息，若pName不为空则模糊查询包含pName的楼层信息 -->
+    <!-- 查询权限信息，若pName不为空则模糊查询包含pName的权限信息 -->
     <select id="getPowers" parameterType="Power" resultType="Power">
         select * from power where 1=1
         <if test='pName!="" and pName!=null and pName!="null"'>

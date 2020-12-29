@@ -10,10 +10,10 @@
 
     <!-- 根据ID查询书库信息 -->
     <select id="getStackRoom" parameterType="StackRoom" resultType="StackRoom">
-        select * from stack_room where srID=#{srID};
+        select * from stack_room where srID=#{srID}
     </select>
 
-    <!-- 查询楼层信息，若srName不为空则模糊查询包含fName的楼层信息 -->
+    <!-- 查询书库信息，若srName不为空则模糊查询包含fName的书库信息 -->
     <select id="getStackRoomList" parameterType="StackRoom" resultType="StackRoom">
         select * from stack_room where 1=1
         <if test='srName!="" and srName!=null and srName!="null"'>
@@ -21,11 +21,15 @@
         </if>
     </select>
 
+    <update id="updateSrStatus" parameterType="StackRoom">
+        update stack_room set srStatus=#{srStatus} where srID=#{srID};
+    </update>
+
     <update id="updateStackRoom" parameterType="StackRoom">
-        update stack_room set srName=#{srName} ,srStatus=#{srStatus} ,fID=#{fID} where srID=#{srID};
+        update stack_room set srName=#{srName} ,srStatus=#{srStatus} ,fID=#{fID} where srID=#{srID}
     </update>
 
     <delete id="deleteStackRoom" parameterType="StackRoom">
-        delete from stack_room where srID=#{srID};
+        delete from stack_room where srID=#{srID}
     </delete>
 </mapper>

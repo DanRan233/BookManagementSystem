@@ -57,8 +57,8 @@ public class FloorController {
      * @return      com.wzk.entity.Result
      */
     @RequestMapping("/getFloorList")
-    public Result getFloorList(@RequestParam(defaultValue = "null") String fName,@RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "5") Integer pageSize){
-        Floor floor=new Floor(fName);
+    public Result getFloorList(@RequestBody Floor floor,@RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "99") Integer pageSize){
+        System.out.println(floor);
         return floorServiceIF.getFloorList(floor,pageNum,pageSize);
     }
 

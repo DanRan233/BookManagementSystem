@@ -11,7 +11,10 @@
 
     <!-- 根据ID查询楼层信息 -->
     <select id="getFloor" parameterType="Floor" resultType="Floor">
-        select * from floor where fID=#{fID};
+        select * from floor where fID=#{fID}
+        <if test='fName!="" and fName!=null and fName!="null"'>
+            OR fName=#{fName}
+        </if>
     </select>
 
     <!-- 查询楼层信息，若fName不为空则模糊查询包含fName的楼层信息 -->

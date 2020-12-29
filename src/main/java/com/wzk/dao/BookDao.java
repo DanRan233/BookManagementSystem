@@ -42,7 +42,18 @@ public interface BookDao {
      * @return      com.wzk.entity.Book
      */
     Book getBook(Book book);
+    
+    /**
+     * description: 根据书架编号更新书本状态
+     * TODO:
+     * @date         2020/12/28 16:57
+     * @author      DanRan233
+     * @Param       [book]
+     * @return      int
+     */
+    int updateStatus(Book book);
 
+    int updateStatus1(Book book);
     /**
      * description: 根据bID或bNumber来对图书信息进行更新操作，bID是根据书本编号更新单个、bNumber是根据书籍编号更新多个
      * TODO:

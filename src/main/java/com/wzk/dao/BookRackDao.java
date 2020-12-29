@@ -18,6 +18,8 @@ public interface BookRackDao {
 
     List<BookRack> getBookRackList(BookRack bookRack);
 
+    int updateBrStatus(BookRack bookRack);
+
     int updateBookRack(BookRack bookRack);
 
     int deleteBookRack(BookRack bookRack);

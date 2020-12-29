@@ -20,6 +20,16 @@ public class Book {
     public Book() {
     }
 
+    public Book(int status, String brID) {
+        this.status = status;
+        this.brID = brID;
+    }
+
+    public Book(int bID, int status) {
+        this.bID = bID;
+        this.status = status;
+    }
+
     public Book(int bID, String bNumber, String bName, String author, String pubDate, int status, String prID, String btID, String brID) {
         this.bID = bID;
         this.bNumber = bNumber;

@@ -5,10 +5,9 @@ import com.wzk.entity.Student;
 import com.wzk.service.StudentServiceIF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * @author DanRan233
@@ -33,9 +32,9 @@ public class StudentController {
      * @return      com.wzk.entity.Result
      */
     @RequestMapping("/login")
-    public Result login(@RequestBody Student student){
+    public Result login(@RequestBody Student student, HttpSession session){
         System.out.println(student);
-        return studentServiceIF.login(student);
+        return studentServiceIF.login(student,session);
     }
 
     /**
@@ -52,5 +51,29 @@ public class StudentController {
         return studentServiceIF.addStuInfo(student);
     }
 
+    @RequestMapping("/getStudent")
+    public  Result getStudent(@RequestBody Student student){
+        System.out.println(student);
+        return studentServiceIF.getStudent(student);
+    }
+
+    @RequestMapping("/getStudentList")
+    public  Result getStudentList(@RequestBody Student student,@RequestParam(defaultValue = "1") Integer pageNum,
+                                       @RequestParam(defaultValue = "5") Integer pageSize){
+        System.out.println(student);
+        return  studentServiceIF.getStudentList(student,pageNum,pageSize);
+    }
+
+    @RequestMapping("/updateStudent")
+    public Result updateStu(@RequestBody Student student){
+        System.out.println(student);
+        return studentServiceIF.updateStudent(student);
+    }
+
+    @RequestMapping("deleteStudent")
+    public  Result delstu(@RequestBody Student student){
+        System.out.println(student);
+        return studentServiceIF.delStudent(student);
+    }
 
 }

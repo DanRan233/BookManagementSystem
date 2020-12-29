@@ -3,4 +3,40 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.wzk.dao.AdministratorDao"></mapper>
+<mapper namespace="com.wzk.dao.AdministratorDao">
+
+    <insert id="addAdm" parameterType="Administrator">
+        insert into administrator(admID,admName,password,tel,pID)
+        values(#{admID},#{admName},#{password},#{tel},2);
+    </insert>
+
+    <select id="login" parameterType="Administrator" resultType="Administrator">
+        select  admID,admName,tel,pID from administrator where admID=#{admID} and password=#{password}
+    </select>
+
+    <select id="getAdmList" resultType="Administrator" parameterType="Administrator">
+        select  admID,admName,tel,pID from administrator where 1=1
+        <if test="admName!=null and admName!='' and admName!='null'">
+            and admName  like concat('%',#{admName},'%')
+        </if>
+    </select>
+
+    <select id="getAdm" parameterType="Administrator" resultType="Administrator">
+        select  admID,admName,tel,pID from administrator where admID=#{admID}
+    </select>
+
+    <update id="updateAdm" parameterType="Administrator">
+        <if test="password==null or password=='' or password=='null'">
+            update administrator set  admName=#{admName},tel=#{tel}
+            where admID=#{admID};
+        </if>
+        <if test="password!=null and password!='' and password!='null'">
+            update administrator set  admName=#{admName},tel=#{tel},password=#{password}
+            where admID=#{admID};
+        </if>
+    </update>
+
+    <delete id="delAdm" parameterType="Administrator">
+        delete from administrator where  admID=#{admID}
+    </delete>
+</mapper>

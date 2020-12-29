@@ -56,14 +56,14 @@ public class BookRackController {
      * @return      com.wzk.entity.Result
      */
     @RequestMapping("/getBookRackList")
-    public Result getBookRackList(@RequestParam(defaultValue = "null") String brName, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "5") Integer pageSize) {
-        BookRack bookRack = new BookRack(brName);
+    public Result getBookRackList(@RequestBody BookRack bookRack, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "99") Integer pageSize) {
+        System.out.println(bookRack);
         return bookRackServiceIF.getBookRackList(bookRack, pageNum, pageSize);
     }
 
     /**
      * description: 
-     * TODO:
+     * TODO:触发器无法更新，需检查错误或更改方案
      * @date         2020/12/26 14:16
      * @author      DanRan233
      * @Param       [bookRack]

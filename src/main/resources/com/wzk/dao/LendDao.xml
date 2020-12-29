@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wzk.dao.LendDao">
+    <resultMap id="lend" type="com.wzk.entity.Lend">
+        <!-- 实体类中pubDate属性的类型为String 需将该属性映射为为数据库中的DATE类型 -->
+        <result column="lDate" property="lDate" jdbcType="DATE"></result>
+    </resultMap>
+
+    <insert id="addLend" parameterType="Lend">
+        insert into lend(sID,bID,lDate,lStatus)
+        values(#{sID},#{bID},DATE_SUB(NOW(),INTERVAL -30 day),#{lStatus})
+    </insert>
+
+    <update id="updateLend" parameterType="Lend">
+        update lend set lStatus=#{lStatus} where sID=#{sID} and bID=#{bID} and lStatus=3
+    </update>
+
+    <select id="getLend" parameterType="Lend" resultType="Lend">
+        select * from lend where 1=1
+        <if test='sID!="" and sID!=null and sID!="null"'>
+            and sID = #{sID}
+        </if>
+        <if test='bID!=0'>
+            and bID = #{bID}
+        </if>
+            and lStatus = 3
+    </select>
+
+    <select id="getLendList" parameterType="Lend" resultType="Lend">
+        select * from lend where 1=1
+        <if test='sID!="" and sID!=null and sID!="null"'>
+            and sID = #{sID}
+        </if>
+        <if test='bID!=0'>
+            and bID = #{bID}
+        </if>
+        <if test='lDate!="" and lDate!=null and lDate!="null"'>
+            and lDate = #{lDate}
+        </if>
+        <if test="lStatus!=0">
+            and lStatus = #{lStatus}
+        </if>
+    </select>
+</mapper>

@@ -8,12 +8,12 @@
         insert into press(prID,prName) values(#{prID},#{prName});
     </insert>
 
-    <!-- 根据ID查询书库信息 -->
+    <!-- 根据ID查询出版社信息 -->
     <select id="getPress" parameterType="Press" resultType="Press">
         select * from press where prID=#{prID};
     </select>
 
-    <!-- 查询楼层信息，若prName不为空则模糊查询包含prName的楼层信息 -->
+    <!-- 查询出版社信息，若prName不为空则模糊查询包含prName的出版社信息 -->
     <select id="getPressList" parameterType="Press" resultType="Press">
         select * from press where 1=1
         <if test='prName!="" and prName!=null and prName!="null"'>

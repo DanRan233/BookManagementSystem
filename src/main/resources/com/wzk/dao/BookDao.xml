@@ -25,7 +25,10 @@
 
     <!-- 获取单个图书详细信息 -->
     <select id="getBook" parameterType="Book" resultType="Book">
-        select * from book where bID=#{bID};
+        select * from book where bID=#{bID}
+        <if test="status!=0">
+            and status=#{status}
+        </if>
     </select>
 
     <!-- 获取图书信息列表  -->
@@ -37,11 +40,24 @@
         <if test='bNumber!="" and bNumber!=null and bNumber!="null"'>
             and bNumber like concat('%',#{bNumber},'%')
         </if>
-        <if test="status != -1">
+        <if test="status == -1 ">
+            and status=#{status} or stasus=1
+        </if>
+        <if test="status != -1 ">
             and status=#{status}
+        </if>
+        <if test='brID!="" and brID!=null and brID!="null" '>
+            and brID=#{brID}
         </if>
     </select>
 
+    <update id="updateStatus" parameterType="Book">
+        update book set status=#{status} where brID=#{brID}
+    </update>
+
+    <update id="updateStatus1" parameterType="Book">
+        update book set status=#{status} where bID=#{bID} and status=#{status};
+    </update>
     <!-- 更新书籍信息 -->
     <update id="updateBook" parameterType="Book">
         update book set bNumber=#{bNumber},bName=#{bName},author=#{author},pubDate=#{pubDate},

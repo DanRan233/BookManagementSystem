@@ -14,7 +14,7 @@ import java.util.List;
 public interface BookServiceIF {
     Result addBook(List<Book> list);
 
-    Result getBookList(Book book);
+    Result getBookList(Book book,Integer pageNum,Integer pageSize);
 
     Result getBook(Book book);
 

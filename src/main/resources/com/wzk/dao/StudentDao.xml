@@ -6,11 +6,37 @@
 <mapper namespace="com.wzk.dao.StudentDao">
 
     <select id="login" parameterType="Student" resultType="Student">
-        select sID,sName from student where sID=#{sID} and password=#{password};
+        select sID,sName from student where sID=#{sID} and password=#{password}
+    </select>
+
+    <select id="getStudent" parameterType="Student" resultType="Student">
+        select sID,sName,status,depID from stu_view where sID=#{sID}
     </select>
 
     <insert id="addStuInfo" parameterType="Student">
         insert into student(sID,sName,password,status,depID) values(#{sID},#{sName},#{password},#{status},#{depID})
     </insert>
+
+    <select id="getStudentList" resultType="Student" parameterType="Student">
+        select sID,sName,status,depID from stu_view where 1=1
+        <if test="sName!=null and sName!='' and sName!='null'">
+            and  sName like concat('%',#{sName},'%')
+        </if>
+     </select>
+
+    <update id="updateStudent" parameterType="Student">
+        <if test="password==null or password=='' or password=='null'">
+            update student set sName=#{sName} ,depID=#{depID}
+            where sID=#{sID}
+        </if>
+        <if test="password!=null and password!='' and password!='null'">
+            update student set sName=#{sName} ,depID=#{depID},password=#{password}
+            where sID=#{sID}
+        </if>
+    </update>
+
+    <delete id="delStudent" parameterType="Student">
+        delete from student where sID=#{sID}
+    </delete>
 
 </mapper>

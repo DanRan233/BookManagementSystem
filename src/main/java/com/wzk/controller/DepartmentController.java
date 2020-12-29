@@ -56,8 +56,8 @@ public class DepartmentController {
      * @return      com.wzk.entity.Result
      */
     @RequestMapping("/getDepartmentList")
-    public Result getDepartmentList(@RequestParam(defaultValue = "null") String depName, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "5") Integer pageSize) {
-        Department department = new Department(depName);
+    public Result getDepartmentList(@RequestBody Department department, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "99") Integer pageSize) {
+        System.out.println(department);
         return departmentServiceIF.getDepartmentList(department, pageNum, pageSize);
     }
 

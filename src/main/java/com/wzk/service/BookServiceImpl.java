@@ -1,5 +1,7 @@
 package com.wzk.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.wzk.dao.BookDao;
 import com.wzk.entity.Book;
 import com.wzk.entity.Result;
@@ -7,6 +9,7 @@ import com.wzk.entity.ResultEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -53,12 +56,15 @@ public class BookServiceImpl implements BookServiceIF {
      * @Param [book]
      */
     @Override
-    public Result getBookList(Book book) {
+    public Result getBookList(Book book,Integer pageNum,Integer pageSize) {
         Result result = new Result(ResultEnum.UNEXECUTED.getCode(), ResultEnum.UNEXECUTED.getMessage());
+        PageHelper.startPage(pageNum,pageSize);
         List<Book> list = bookDao.getBookList(book);
+        System.out.println(list);
+        PageInfo page=new PageInfo(list);
         result.setCode(ResultEnum.SUCCESS.getCode());
         result.setMessage(ResultEnum.SUCCESS.getMessage());
-        result.setData(list);
+        result.setData(page);
         return result;
     }
 
@@ -74,6 +80,7 @@ public class BookServiceImpl implements BookServiceIF {
     @Override
     public Result getBook(Book book) {
         Result result = new Result(ResultEnum.UNEXECUTED.getCode(), ResultEnum.UNEXECUTED.getMessage());
+        //获取单个图书信息
         Book b = bookDao.getBook(book);
         result.setCode(ResultEnum.SUCCESS.getCode());
         result.setMessage(ResultEnum.SUCCESS.getMessage());
@@ -92,12 +99,21 @@ public class BookServiceImpl implements BookServiceIF {
     @Override
     public Result updateBook(Book book) {
         Result result = new Result(ResultEnum.UNEXECUTED.getCode(), ResultEnum.UNEXECUTED.getMessage());
-        int i = bookDao.updateBook(book);
-        if(i>0){
+        if(book.getbID()!=0) {
+
+            int i = bookDao.updateBook(book);
+            if (i > 0) {
+                result.setCode(ResultEnum.SUCCESS.getCode());
+                result.setMessage(ResultEnum.SUCCESS.getMessage());
+            } else {
+                result.setMessage(ResultEnum.UNEXECUTED.getMessage());
+            }
+        }else {
+            List<Book> l =new ArrayList<>();
+            l.add(book);
+            bookDao.addBook(l);
             result.setCode(ResultEnum.SUCCESS.getCode());
             result.setMessage(ResultEnum.SUCCESS.getMessage());
-        }else{
-            result.setMessage(ResultEnum.UNEXECUTED.getMessage());
         }
         return result;
     }
