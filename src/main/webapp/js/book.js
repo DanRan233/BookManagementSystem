@@ -160,7 +160,8 @@ $(document).on("click", ".app", function () {
             contentType: "application/json",
             dataType: "json",
             data: JSON.stringify({
-                "bID":bID
+                "bID":bID,
+                "appStatus":99
             }),
             dataType: "json",
             success: function (msg) {
@@ -188,7 +189,8 @@ $(document).on("click", ".lend", function () {
             contentType: "application/json",
             dataType: "json",
             data: JSON.stringify({
-                "bID":bID
+                "bID":bID,
+                "lStatus":3
             }),
             dataType: "json",
             success: function (msg) {

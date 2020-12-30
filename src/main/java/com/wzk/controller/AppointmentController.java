@@ -33,7 +33,8 @@ public class AppointmentController {
     @RequestMapping("/addAppointment")
     public Result addAppointment(@RequestBody Appointment appointment, HttpSession session) {
         appointment.setsID(session.getAttribute("sID").toString());
-        System.out.println(appointment);
+        appointment.setAppStatus(2);
+        System.out.println(appointment.toString());
         return appointmentServiceIF.addAppointment(appointment);
     }
 

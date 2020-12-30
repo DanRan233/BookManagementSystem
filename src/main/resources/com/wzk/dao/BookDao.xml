@@ -56,7 +56,7 @@
     </update>
 
     <update id="updateStatus1" parameterType="Book">
-        update book set status=#{status} where bID=#{bID} and status=#{status};
+        update book set status=#{status} where bID=#{bID};
     </update>
     <!-- 更新书籍信息 -->
     <update id="updateBook" parameterType="Book">

@@ -1,4 +1,3 @@
-
 $(function () {
 
     // $.ajax({
@@ -55,9 +54,20 @@ function queryPage_book(page) {
                 tr += " <td class=\"td\" >" +
                     "<span style=\"text-align: center;display:block;\">" +
                     obj.fName + "</span> </td>";
-                tr += " <td class=\"td\" >" +
-                    "<span style=\"text-align: center;display:block;\">" +
-                    obj.fStatus + "</span> </td>";
+                if (obj.fStatus == 1) {
+                    tr += " <td class=\"td\" >" +
+                        "<span style=\"text-align: center;display:block;\">" +
+                        "启用</span> </td>";
+                } else if (obj.fStatus == 2) {
+                    tr += " <td class=\"td\" >" +
+                        "<span style=\"text-align: center;display:block;\">" +
+                        "禁用</span> </td>";
+                } else {
+                    tr += " <td class=\"td\" >" +
+                        "<span style=\"text-align: center;display:block;\">" +
+                        obj.fStatus + "</span> </td>";
+                }
+
                 tr += "\<td class=\"td\" id=\"td_Nine\">" +
                     "<span id=\"Update\" name=\"Update\"style =\"text-align: center;display:block;\">" +
                     "<input type=\"button\"value =\"修改\" id=" + obj.fID +
@@ -89,7 +99,7 @@ function updatePage(obj) {
 //获取修改信息
 $(document).on("click", ".update", function () {
     var fId = this.id;
-    document.getElementById('fID').setAttribute("disabled","disabled");
+    //document.getElementById('fID').setAttribute("disabled","disabled");
     $('#w').window('open');
     $.ajax({
         url: "/floor/getFloor",
@@ -111,14 +121,12 @@ $(document).on("click", ".update", function () {
     });
 });
 
-function  r(){
-
-    document.getElementById('fID').removeAttribute("disabled");
+function r() {
+    //document.getElementById('fID').removeAttribute("disabled");
 }
 
 function getss(ss) {
     var status_select = document.getElementById("fStatus")
-    alert(ss);
     if (ss == 1) {
         $("#fStatus option").remove()
         status_select.options.add(new Option("启用", 1))
@@ -130,7 +138,7 @@ function getss(ss) {
     }
 }
 
-function Update(){
+function Update() {
     if ($("#fName").val() != "") {
         var fName = $("#fName").val();
         var fID = $("#fID").val();

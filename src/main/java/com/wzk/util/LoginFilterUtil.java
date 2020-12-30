@@ -31,6 +31,7 @@ public class LoginFilterUtil implements Filter {
         list.add("/js/login.js");
         list.add("/favicon.ico");
 
+
         list_s.add("/pages/bookInfo.html");
         list_s.add("/pages/index.html");
         list_s.add("/pages/lendInfo.html");

@@ -1,5 +1,6 @@
 var pr = {};
 var bt = {};
+var br = {}
 $(function () {
     $.ajax({
         url: "/press/getPressList",
@@ -27,6 +28,8 @@ $(function () {
             console.log(pr)
         }
     });
+
+
     queryPage_book(1);
 });
 
@@ -185,7 +188,7 @@ function r() {
     document.getElementById('brID').removeAttribute("disabled");
 }
 
-function getss(sr) {
+function getss(sr,br) {
     $.ajax({
         url: "/bookType/getBookTypeList",
         type: "post",
@@ -200,13 +203,39 @@ function getss(sr) {
             var sr_select = document.getElementById("btID")
             $("#btID option").remove()
             $.each(msg.data.list, function (key, ob) {
-                if (sr != 0 && sr == ob.sbtID) {
+                if (br != 0 && br == ob.sbtID) {
                     sr_select.options.add(new Option(ob.btName, ob.btID, true, true))
                 } else {
                     sr_select.options.add(new Option(ob.btName, ob.btID))
                 }
             });
             console.log(sr)
+        }
+    });
+    $.ajax({
+        url: "/bookRack/getBookRackList",
+        type: "post",
+        async: true,
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({
+            "brName": ""
+        }),
+        success: function (msg) {
+            console.log(msg)
+            var sr_select = document.getElementById("brID")
+            $.each(msg.data.list, function (key, ob) {
+                $("#brID option").remove()
+                $.each(msg.data.list, function (key, ob) {
+                    if (sr != 0 && sr == ob.brID) {
+                        sr_select.options.add(new Option(ob.brName, ob.brID, true, true))
+                    } else {
+                        sr_select.options.add(new Option(ob.brName, ob.brID))
+                    }
+                });
+
+            });
+            console.log(pr)
         }
     });
 }
@@ -236,7 +265,7 @@ function Update() {
                 "brID": brID,
                 "btID": btID,
                 "prID": prID,
-                "status":1
+                "status": 1
             }),
             success: function (msg) {
                 alert(msg.message);
