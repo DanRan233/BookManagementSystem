@@ -33,7 +33,7 @@ public class LoginFilterUtil implements Filter {
 
 
         list_s.add("/pages/bookInfo.html");
-        list_s.add("/pages/index.html");
+        list_s.add("/pages/index_s.html");
         list_s.add("/pages/lendInfo.html");
         list_s.add("/pages/appointment.html");
 

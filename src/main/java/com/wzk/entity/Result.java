@@ -13,7 +13,6 @@ public class Result<T> implements Serializable {
     private Integer code; // 消息码
     private String message; // 报文
     private T data; // 返回数据
-
     public Result(Integer code, String message, T data) {
         this.code = code;
         this.message = message;

@@ -42,6 +42,7 @@ public class ReturnServiceImpl  implements ReturnServiceIF{
             try {
                 date = simpleDateFormat.parse(l.getlDate());
                 long ts = date.getTime();
+                //判断是否违约
                 if(ts<System.currentTimeMillis()){
                     violateDao.addViolate(new Violate(l.getsID(),l.getbID(),null,4));
                     bookDao.updateStatus(new Book(r.getbID(),1));

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <title></title>
@@ -7,8 +8,21 @@
 <script src="../js/easyui/jquery.min.js"></script>
 <script src="../js/easyui/jquery.easyui.min.js"></script>
 <style>
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
 
-    button, input {
+    iframe {
+        position: absolute;
+        float: left;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+    }
+
+    button,
+    input {
         outline: none;
     }
 
@@ -16,36 +30,44 @@
         width: 100%;
         height: 100%;
         overflow: hidden;
-        background-color: #969696;
     }
 
     .main {
-        padding: 40px 0px;
         width: 100%;
         height: 100%;
         position: absolute;
-        background-color: #969696;
         opacity: 0.5;
     }
 
+    label {
+        font-size: 15px;
+        color: #0A0A0A;
+    }
+
     form {
-        width: 340px;
+        width: 720px;
+        height: 550px;
+        border: 1px solid #F0FFFF;
         margin: 0 auto;
-        background-color: #FFFFFF;
-        box-shadow: 0 0 15px 0 rgb(220, 222, 230);
-        border-radius: 5px;
+        margin-top: 120px;
+        border-radius: 15px;
+        box-shadow: 3px 3px 5px #C5C5C5;
+    }
+
+    .login1, .registe {
+        border-radius: 8px;
     }
 
     .main form input {
         margin: 10px 0;
         width: 200px;
         height: 35px;
+        margin-top: 25px;
         border-radius: 3px;
         display: inline-block;
         border: 1px solid #000;
         padding-left: 10px;
     }
-
 
     .top {
         height: 30px;
@@ -53,23 +75,16 @@
         position: relative;
     }
 
-    .top .login1 {
-        line-height: 30px;
+    .top .login1, .registe {
+        line-height: 40px;
         letter-spacing: 10px;
         float: left;
-        width: 45%;
+        width: 47%;
+        height: 40px;
         border-right: 1px solid rgba(165, 161, 161, 0.1);
         border-bottom: 1px solid rgba(165, 161, 161, 0.1);
     }
 
-    .top .registe {
-        line-height: 30px;
-        letter-spacing: 10px;
-        float: left;
-        width: 45%;
-        border-right: 1px solid rgba(165, 161, 161, 0.1);
-        border-bottom: 1px solid rgba(165, 161, 161, 0.1);
-    }
 
     .top .close {
         width: 20px;
@@ -78,11 +93,31 @@
         top: 5px;
         right: 7px;
         font-size: 20px;
-
     }
 
     .clear {
+        width: 400px;
+        height: 50px;
+        margin-left: 23%;
         clear: both;
+    }
+
+    .password {
+        width: 400px;
+        height: 200px;
+        margin-left: 23%;
+    }
+
+    .body_login {
+        width: 720px;
+        height: 350px;
+        margin-top: 80px;
+    }
+
+    .body_registe {
+        width: 720px;
+        height: 350px;
+        margin-top: 100px;
     }
 
     .body label {
@@ -97,9 +132,30 @@
         justify-content: space-around;
     }
 
-    .main form .btn2 input {
+    .btn2 input:hover {
+        background-color: #FFFFF0;
+    }
+
+    .btn3 {
+        margin-top: 180px;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .btn3 input:hover {
+        background-color: #FFFFF0;
+    }
+
+    .btn3 input {
         width: 30%;
-        background-color: lightskyblue;
+        border-radius: 5px;
+        line-height: 30px;
+        letter-spacing: 10px;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .main form .btn2 input {
         border-radius: 5px;
         line-height: 30px;
         letter-spacing: 10px;
@@ -107,7 +163,9 @@
         text-align: center;
     }
 </style>
+
 <body>
+<iframe src="/pages/index2.html"></iframe>
 <div class="wrapper mark" style="display: block;">
     <div class="main">
         <form action="index.html" name="myForm">
@@ -127,9 +185,6 @@
                     </div>
                     <div class="password">
                         <label>密码：</label><input type="password" id="pwd" placeholder="密码">
-                        <label>点击图片更换验证码</label><canvas id="canvas" width="100" height="30"></canvas><br/>
-                        <label>验证码：</label><input type="text" id="png_code" placeholder="请输入验证码">
-
                     </div>
                     <div class="btn2">
                         <input type="button" value="登录" id="login"/>
@@ -141,18 +196,18 @@
                         <label>用户名：</label><input id="uName_r" type="text" value="" placeholder="请输入用户名"/>
                         <label>密码：</label><input id="password_r" type="password" placeholder="请输入密码"/>
                     </div>
-                    <div class="btn2">
+                    <div class="btn3">
                         <input type="button" value="登录" id="registe"/>
                         <input type="reset" value="重置"/>
                     </div>
                 </div>
             </div>
 
-
         </form>
     </div>
 </div>
 </body>
+
 </html>
 <script>
     var login = document.querySelector(".login1");
@@ -161,9 +216,11 @@
     var body_registe = document.querySelector(".body_registe");
     var code_c;
     var show_num = [];
+
+
     login.onclick = function () {
         //console.log(1);
-        login.style.backgroundColor = "blue";
+        login.style.backgroundColor = "#FFFAF0";
         body_login.style.display = "block";
         body_registe.style.display = "none";
         registe.style.backgroundColor = "";
@@ -171,7 +228,7 @@
     registe.onclick = () => {
         //console.log(2);
         login.style.backgroundColor = "";
-        registe.style.backgroundColor = "blue";
+        registe.style.backgroundColor = "#FFFAF0";
         body_login.style.display = "none";
         body_registe.style.display = "block";
 
@@ -184,7 +241,6 @@
         })
     });
 
-
     $(document).on("click", "#registe", function () {
         if ($("#password_r").val() == "") {
             alert("密码为空");
@@ -193,7 +249,7 @@
             // } else if ($("#email_r").val() == "" || !/^([a-zA-Z\d])(\w|\-)+@[a-zA-Z\d]+\.[a-zA-Z]{2,4}$/.test($("#email_r").val())) {
             //     alert("邮箱格式不正确");
             //
-        }else {
+        } else {
             $.ajax({
                 type: "post",
                 url: "/adm/login",
@@ -204,7 +260,7 @@
                 success: function (msg) {
                     if (msg.code == 2001) {
                         alert(msg.message);
-                        window.location.href = "/pages/index_a.html"
+                        window.location.href = "pages/index_a.html"
                     } else {
                         alert(msg.message);
                     }
@@ -227,42 +283,37 @@
     });
 
     $(document).on("click", "#login", function () {
-        var val = $("#png_code").val().toLowerCase();
         var num = show_num.join("");
-        if (val == num) {
-            $.ajax({
-                type: "post",
-                url: "/stu/login",
-                async: true,
-                contentType: "application/json",
-                dataType: "json",
-                data: JSON.stringify(GetJsonData_tel()),
-                success: function (msg) {
-                    if (msg.code == 2001) {
-                        alert(msg.message);
-                        window.location.href = "/pages/index.html"
-                    } else {
-                        alert(msg.message);
-                    }
-                },
-            });
+        $.ajax({
+            type: "post",
+            url: "/stu/login",
+            async: true,
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify(GetJsonData_tel()),
+            success: function (msg) {
+                if (msg.code == 2001) {
+                    alert(msg.message);
+                    window.location.href = "/pages/index_s.html"
+                } else {
+                    alert(msg.message);
+                }
+            },
+        });
 
-            function GetJsonData_tel() {
-                var json = {
-                    "sID": $("#sID").val(),
-                    "password": $("#pwd").val()
-                };
-                return json;
+        function GetJsonData_tel() {
+            var json = {
+                "sID": $("#sID").val(),
+                "password": $("#pwd").val()
             };
-            //    var uName=$("#uName_r").val();
-            // var tel=$("#tel_r").val();
-            // var password=$("#password_r").val();
-            // var passwordtwo=$("#passwordtwo_r").val();
-            // var email=$("#email_r").val();
-        } else {
-            alert("验证码错误");
-            draw(show_num);
-        }
+            return json;
+        };
+        //    var uName=$("#uName_r").val();
+        // var tel=$("#tel_r").val();
+        // var password=$("#password_r").val();
+        // var passwordtwo=$("#passwordtwo_r").val();
+        // var email=$("#email_r").val();
+
 
     });
 
@@ -318,5 +369,4 @@
         var b = Math.floor(Math.random() * 256);
         return "rgb(" + r + "," + g + "," + b + ")";
     }
-
 </script>

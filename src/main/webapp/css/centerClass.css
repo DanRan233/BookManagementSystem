@@ -1,0 +1,106 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+iframe{
+	position:absolute;
+	float: left;
+	z-index: -1; 
+	width: 100%;
+	height: 100%;
+}
+.anyClass{
+	display: none;
+}
+/*进入之后其他页面隐藏，只显示登录页面*/
+#denglu1{
+	display: block;
+}
+/*首页*/
+#shouye1{
+	width: 500px;
+	height: 400px;
+	position: relative;
+	overflow: hidden;
+}
+#lun_bo{
+	width: 2000px;
+	height: 400px;
+	position: absolute;
+	left: 0px;
+	z-index: 1;	
+}
+#lun_bo img{
+	float: left;
+	width: 500px;
+	height: 400px;
+}
+/*登录页面*/
+#dl_shuru{
+	width: 720px;
+	height: 550px;
+	border: 1px solid #F0FFFF;
+	margin: 0 auto;
+	margin-top: 120px;
+	border-radius: 15px;
+	box-shadow: 3px 3px 5px #C5C5C5;
+}
+#dl_shuru>form>div{
+	width: 150px;
+	height: 100px;
+	margin-top: 50px;
+	margin-left: 270px;
+}
+#dl_shuru>form>input[type="text"],[type="password"]{
+	background: none;/*更改默认背景颜色*/
+	outline: none;/*去除默认样式*/
+	border: 0;/*去除默认边框*/
+	width: 250px;
+	height: 30px;
+	margin: 10px;
+	font-size: 18px;
+	margin-left:230px;
+	margin-top:10px;
+	list-style-type: none;
+}
+#dl_shuru>form>input[type="button"]{
+	background:wheat;/*更改默认背景颜色*/
+	outline: none;/*去除默认样式*/
+	border:none;/*去除默认边框*/
+	margin-top: 5px;
+	width: 150px;
+	height: 35px;
+	border-radius: 25px;
+	margin: 30px;
+	margin-left: 270px;
+	font-size: 18px;
+}
+#dl_shuru>form>input:hover{
+	border:1px solid #F0FFFF;
+}
+/*查看图书界面*/
+#ck_tushu1{
+	width: 1200px;
+	height: 600px;
+	margin: 0 auto;
+	background-color: ghostwhite;
+	margin-top: 120px;
+}
+#ck_tushu1 table{
+	border-collapse:collapse; 
+ 	border-spacing:0; 
+	text-align: center;
+	border: 1px solid #326BF3;
+	border-radius: 5px;
+}
+#ck_tushu1 td{
+	width: 200px;
+	height: 40px;
+}
+#ck_tushu1 th{
+	width: 200px;
+	height: 60px;
+	font-size: 25px;
+}
+
+

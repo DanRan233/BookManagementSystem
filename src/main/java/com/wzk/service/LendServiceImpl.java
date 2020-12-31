@@ -37,6 +37,7 @@ public class LendServiceImpl implements LendServiceIF {
         List<Violate> v = violateDao.getViolateList(new Violate(lend.getsID(), 0, null, 4));
         System.out.println(lend);
         System.out.println(v);
+        //存在违约记录不可借阅 和书本状态不可借阅
         if (v.size() > 0
         ) {
             result.setMessage("存在违规记录！不可借阅。");

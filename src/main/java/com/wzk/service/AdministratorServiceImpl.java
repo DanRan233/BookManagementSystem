@@ -40,6 +40,7 @@ public class AdministratorServiceImpl implements AdministratorServiceIF {
         //对密码进行加密处理
         administrator.setPassword(sha.encode(administrator.getPassword()));
         administratorDao.addAdm(administrator);
+        //成功则会返回成功执行码 出现异常会被顶层捕获
         result.setMessage(ResultEnum.SUCCESS.getMessage());
         result.setCode(ResultEnum.SUCCESS.getCode());
         return result;
@@ -67,6 +68,7 @@ public class AdministratorServiceImpl implements AdministratorServiceIF {
     @Override
     public Result getAdmList(Administrator administrator, Integer pageNum, Integer pageSize) {
         Result result = new Result(ResultEnum.UNEXECUTED.getCode(), ResultEnum.UNEXECUTED.getMessage());
+        //获取管理员集合并分页 无密码
         List<Administrator> list = administratorDao.getAdmList(administrator);
         PageHelper.startPage(pageNum, pageSize);
         PageInfo page = new PageInfo(list);
@@ -79,6 +81,7 @@ public class AdministratorServiceImpl implements AdministratorServiceIF {
     @Override
     public Result getAdm(Administrator administrator) {
         Result result = new Result(ResultEnum.UNEXECUTED.getCode(), ResultEnum.UNEXECUTED.getMessage());
+        //获取单个管理员信息 无密码
         Administrator a = administratorDao.getAdm(administrator);
         result.setCode(ResultEnum.SUCCESS.getCode());
         result.setMessage(ResultEnum.SUCCESS.getMessage());
@@ -89,7 +92,7 @@ public class AdministratorServiceImpl implements AdministratorServiceIF {
     @Override
     public Result updateAdm(Administrator administrator) {
         Result result = new Result(ResultEnum.UNEXECUTED.getCode(), ResultEnum.UNEXECUTED.getMessage());
-
+        //判断管理员是否存在 不存在则添加管理员，存在则更新信息
         if (administratorDao.getAdm(administrator) != null) {
             administrator.setPassword(sha.encode(administrator.getPassword()));
             int i = administratorDao.updateAdm(administrator);
@@ -115,6 +118,7 @@ public class AdministratorServiceImpl implements AdministratorServiceIF {
     @Override
     public Result delAdm(Administrator administrator) {
         Result result = new Result(ResultEnum.UNEXECUTED.getCode(), ResultEnum.UNEXECUTED.getMessage());
+        //删除管理员 root用户不可删除
         if ("root".equals(administrator.getAdmID())) {
             result.setMessage("超级管理员不能删除");
             return result;

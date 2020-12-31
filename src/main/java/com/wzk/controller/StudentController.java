@@ -51,12 +51,28 @@ public class StudentController {
         return studentServiceIF.addStuInfo(student);
     }
 
+    /**
+     * description: 
+     * TODO:
+     * @date         2020/12/30 9:39
+     * @author      DanRan233
+     * @Param       [student]
+     * @return      com.wzk.entity.Result
+     */
     @RequestMapping("/getStudent")
     public  Result getStudent(@RequestBody Student student){
         System.out.println(student);
         return studentServiceIF.getStudent(student);
     }
 
+    /**
+     * description: 
+     * TODO:
+     * @date         2020/12/30 9:39
+     * @author      DanRan233
+     * @Param       [student, pageNum, pageSize]
+     * @return      com.wzk.entity.Result
+     */
     @RequestMapping("/getStudentList")
     public  Result getStudentList(@RequestBody Student student,@RequestParam(defaultValue = "1") Integer pageNum,
                                        @RequestParam(defaultValue = "5") Integer pageSize){
@@ -64,12 +80,28 @@ public class StudentController {
         return  studentServiceIF.getStudentList(student,pageNum,pageSize);
     }
 
+    /**
+     * description: 
+     * TODO:
+     * @date         2020/12/30 9:39
+     * @author      DanRan233
+     * @Param       [student]
+     * @return      com.wzk.entity.Result
+     */
     @RequestMapping("/updateStudent")
     public Result updateStu(@RequestBody Student student){
         System.out.println(student);
         return studentServiceIF.updateStudent(student);
     }
 
+    /**
+     * description: 
+     * TODO:
+     * @date         2020/12/30 9:58
+     * @author      DanRan233
+     * @Param       [student]
+     * @return      com.wzk.entity.Result
+     */
     @RequestMapping("deleteStudent")
     public  Result delstu(@RequestBody Student student){
         System.out.println(student);

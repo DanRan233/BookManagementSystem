@@ -41,7 +41,7 @@
             and bNumber like concat('%',#{bNumber},'%')
         </if>
         <if test="status == -1 ">
-            and status=#{status} or stasus=1
+            and status=#{status} or status=1
         </if>
         <if test="status != -1 ">
             and status=#{status}

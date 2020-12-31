@@ -40,6 +40,7 @@ public class AppointmentServiceImpl implements AppointmentServiceIF {
     @Transactional
     public Result addAppointment(Appointment appointment) {
         Result result = new Result(ResultEnum.UNEXECUTED.getCode(), ResultEnum.UNEXECUTED.getMessage());
+        //判断用户是否存在违约记录和书本是否能被预约
         List<Violate> v=violateDao.getViolateList(new Violate(appointment.getsID(),0, null, 4));
         if (v.size() > 0
         )  {
@@ -117,7 +118,7 @@ public class AppointmentServiceImpl implements AppointmentServiceIF {
     @Override
     public Result getAppointmentList(Appointment appointment, Integer pageNum, Integer pageSize) {
         Result result = new Result(ResultEnum.UNEXECUTED.getCode(), ResultEnum.UNEXECUTED.getMessage());
-        //查询预约集合并放入结果集
+        //查询预约集合并放入结果集并分页
         PageHelper.startPage(pageNum, pageSize);
         List<Appointment> list = appointmentDao.getAppointmentList(appointment);
         System.out.println(list);

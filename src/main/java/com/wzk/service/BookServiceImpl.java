@@ -36,6 +36,7 @@ public class BookServiceImpl implements BookServiceIF {
     @Override
     public Result addBook(List<Book> list) {
         Result result = new Result(ResultEnum.UNEXECUTED.getCode(), ResultEnum.UNEXECUTED.getMessage());
+        //添加图书信息
         int i = bookDao.addBook(list);
         if (i > 0) {
             result.setCode(ResultEnum.SUCCESS.getCode());
@@ -58,6 +59,7 @@ public class BookServiceImpl implements BookServiceIF {
     @Override
     public Result getBookList(Book book,Integer pageNum,Integer pageSize) {
         Result result = new Result(ResultEnum.UNEXECUTED.getCode(), ResultEnum.UNEXECUTED.getMessage());
+        //获取图书信息并分页
         PageHelper.startPage(pageNum,pageSize);
         List<Book> list = bookDao.getBookList(book);
         System.out.println(list);
@@ -99,6 +101,7 @@ public class BookServiceImpl implements BookServiceIF {
     @Override
     public Result updateBook(Book book) {
         Result result = new Result(ResultEnum.UNEXECUTED.getCode(), ResultEnum.UNEXECUTED.getMessage());
+        //图书信息存在则更新，不存在则添加
         if(book.getbID()!=0) {
 
             int i = bookDao.updateBook(book);
@@ -130,6 +133,7 @@ public class BookServiceImpl implements BookServiceIF {
     public Result delBook(Book book) {
         Result result = new Result(ResultEnum.UNEXECUTED.getCode(), ResultEnum.UNEXECUTED.getMessage());
         System.err.println(book);
+        //删除书本信息
         int i = bookDao.delBook(book);
         if(i>0){
             result.setCode(ResultEnum.SUCCESS.getCode());

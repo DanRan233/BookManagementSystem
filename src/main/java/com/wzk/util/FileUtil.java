@@ -9,7 +9,7 @@ import java.util.Properties;
  * @author DanRan233
  * @projectName MS_company
  * @description: 读取配置文件工具类 TODO
- * @date 2020/11/22 14:33
+ * @date 2020/12/28 14:33
  */
 public class FileUtil {
 
